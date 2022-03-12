@@ -12,7 +12,7 @@ public class CountryData {
     private List<Country> countryData = new ArrayList<>();
     private List<Country> countryOver = new ArrayList<>();
     private List<Country> countryUnder = new ArrayList<>();
-    private Double fullDph;
+    private double fullDph;
     private DecimalFormat format = new DecimalFormat("0.#");
     private static final String DELIMITER = "\t";
 
@@ -59,8 +59,8 @@ public class CountryData {
             for (Country country : listName) {
                 String outputLine = country.getStateAbbreviation() + delimiter;
                 outputLine += country.getStateName() + delimiter;
-                outputLine += country.getFullDph().toString() + delimiter;
-                outputLine += country.getReduceDph().toString() + delimiter;
+                outputLine += format.format(country.getFullDph()) + delimiter;
+                outputLine += format.format(country.getReduceDph()) + delimiter;
                 outputLine += country.isSpecialDph();
                 writer.println(outputLine);
             }
@@ -114,8 +114,10 @@ public class CountryData {
      * Metoda, která seřadí a filtruje seznam podle nastavené proměnné (DPH danné země)
      * @param fullDph
      */
-    public void filterDph(Double fullDph){
+    public void filterDph(double fullDph){
         this.fullDph = fullDph;
+        countryOver.clear();//před filtrací je třeba pomocné seznamy vyčistit
+        countryUnder.clear();
         Collections.sort(countryData);
         Collections.reverse(countryData);
         for (Country country: countryData){
@@ -131,8 +133,10 @@ public class CountryData {
      * Dělá to co předchozí metoda, ale je přidána podmínka jestli má speciální DPH
      * @param fullDph
      */
-    public void filterDphAndSpecialDph(Double fullDph){
+    public void filterDphAndSpecialDph(double fullDph){
         this.fullDph = fullDph;
+        countryOver.clear();//před filtrací je třeba pomocné seznamy vyčistit
+        countryUnder.clear();
         Collections.sort(countryData);
         Collections.reverse(countryData);
         for (Country country: countryData){
@@ -164,8 +168,7 @@ public class CountryData {
     public String getUnder(){
         String underCountries = "";
         for (Country country: countryUnder) {
-            underCountries += country.getStateName() + " (" + country.getStateAbbreviation() + "): " +
-                    format.format(country.getFullDph()) + " % (" + format.format(country.getReduceDph()) + " %)\n";
+            underCountries += country.getStateAbbreviation() + ", ";
         }
         return underCountries;
     }

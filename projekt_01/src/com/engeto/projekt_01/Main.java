@@ -24,8 +24,7 @@ public class Main {
         //vypsání obou seznamů
         String data = countryData.getOver() + "\n" +
                 "===================================================================================\n" +
-                "Sazba VAT 20 % nebo nižší nebo používají speciální sazbu: AT, CY, CZ,... \n\n" +
-                countryData.getUnder() + "\n";
+                "Sazba VAT 20 % nebo nižší nebo používají speciální sazbu: " + countryData.getUnder() + "\n";
 
         System.out.println("\n\n\n" + data);
 
@@ -33,11 +32,12 @@ public class Main {
         countryData.saveOverToFile();
 
         //krok 7
-        Double fullDph = 0.0;
+        double fullDph = 0.0;
         String inputDph = "";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Zadejte výši DPH podle které se bude výběr filtrovat:");
         inputDph = scanner.nextLine();
+
         if (inputDph.equals("")) {
             System.out.println("Nezadal jste žádnou hodnotu, použila se výchozí hodnota 20% dph");
             fullDph = 20.0;
@@ -48,7 +48,7 @@ public class Main {
         countryData.filterDph(fullDph);
 
         //výpis filtru
-        System.out.println(countryData.getUnder());
+        System.out.println(countryData.getOver());
 
         //uložení filtru
         countryData.saveOverToFile();

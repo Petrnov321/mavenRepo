@@ -32,19 +32,19 @@ public class Country implements Comparable<Country> {
         this.stateName = stateName;
     }
 
-    public Double getFullDph() {
+    public double getFullDph() {
         return fullDph;
     }
 
-    public void setFullDph(Double fullDph) {
+    public void setFullDph(double fullDph) {
         this.fullDph = fullDph;
     }
 
-    public Double getReduceDph() {
+    public double getReduceDph() {
         return reduceDph;
     }
 
-    public void setReduceDph(Double reduceDph) {
+    public void setReduceDph(double reduceDph) {
         this.reduceDph = reduceDph;
     }
 
